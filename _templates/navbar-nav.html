@@ -1,0 +1,17 @@
+{# Generic placeholder navbar links —
+   TODO: replace hrefs with your project's real pages (#TODO-navbar) #}
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item"><a class="nav-link nav-internal" href="{{ pathto('index') }}">Home</a></li>
+    <li class="nav-item"><a class="nav-link nav-internal" href="{{ pathto('getting_started') }}">Guide</a></li>
+    <li class="nav-item"><a class="nav-link nav-internal" href="{{ pathto('tutorials') }}">Tutorials</a></li>
+    <li class="nav-item"><a class="nav-link nav-external" href="https://example.com/api" target="_blank" rel="noopener">API</a></li>
+    <li class="nav-item dropdown">
+      <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">More</button>
+      <ul class="dropdown-menu">
+        <li class="nav-item"><a class="nav-link nav-external" href="https://example.com/community" target="_blank" rel="noopener">Community</a></li>
+        <li class="nav-item"><a class="nav-link nav-internal" href="{{ pathto('faq') }}">FAQ</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
