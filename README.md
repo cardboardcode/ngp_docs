@@ -59,4 +59,3 @@ python -m http.server -d _build/html
   `index.md`) — there is no multi-version machinery.
 - Optional extras commented out in `requirements.txt` / `conf.py`:
   `sphinxcontrib.mermaid`, `sphinxcontrib.googleanalytics`.
-# ngp_docs
