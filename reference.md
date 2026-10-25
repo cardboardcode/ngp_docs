@@ -1,4 +1,4 @@
-# Reference
+# Overview
 
 This is the **Reference** section. It lists reference material that documents what is shipped: release features, the release cycle, governance, the Fuel catalog policies, and the projects that use this stack.
 
