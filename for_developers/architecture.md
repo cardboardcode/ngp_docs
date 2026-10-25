@@ -1,4 +1,4 @@
-# Sim Architecture
+# Architecture
 
 This is a placeholder page. Content will be added here in a future pass.
 

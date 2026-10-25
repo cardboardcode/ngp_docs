@@ -1,5 +1,3 @@
-# Overview
-
 This is the **For Developers** section. It holds documentation aimed at people who contribute to, or build on top of, the project: architecture, library how-tos, continuous-integration recipes, and release process.
 
 Every page below is a placeholder; content will be filled in over time.
@@ -10,13 +8,6 @@ Every page below is a placeholder; content will be filled in over time.
 for_developers/architecture
 for_developers/library_howtos
 for_developers/roadmap
-:::
-
-:::{toctree}
-:maxdepth: 1
-:hidden:
-:caption: How-to Guides
-for_developers/how_to_guides/ci
 :::
 
 :::{toctree}
