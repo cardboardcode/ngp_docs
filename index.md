@@ -4,34 +4,29 @@ A starting point for Sphinx-based documentation: pydata-sphinx-theme + MyST
 Markdown + custom CSS, derived from the Gazebo Sim docs.
 
 :::{toctree}
-:maxdepth: 1
+:maxdepth: 2
 :caption: Get started
 getting_started
 tutorials
 api
 :::
 
-:::{grid} 1 1 2 3
-:::{grid-item}
-:::{grid-item-card} Get started
-:link: getting_started.html
+:::{toctree}
+:maxdepth: 2
+:caption: For users
+for_users
+:::
 
-Prerequisites, installation and a quick tour of the toolchain.
+:::{toctree}
+:maxdepth: 2
+:caption: For developers
+for_developers
 :::
-:::{grid-item}
-:::{grid-item-card} Tutorials
-:link: tutorials.html
 
-Hands-on examples with callouts and task lists.
-:::
-:::
-:::{grid-item}
-:::{grid-item-card} API
-:link: api.html
-
-Placeholder for generated or hand-written API reference.
-:::
-:::
+:::{toctree}
+:maxdepth: 2
+:caption: Reference
+reference
 :::
 
 :::{note}
