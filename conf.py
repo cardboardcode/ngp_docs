@@ -13,9 +13,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Docs Template"
-author = "Your Org"
-copyright = "2026, Your Org"
+project = "NGP"
+author = "Bey Hao Yun"
+copyright = "2026, Bey Hao Yun"
 
 version = "0.1"   # The short X.Y version, e.g. "1.0"
 release = "0.1"   # The full version, e.g. "1.0.3"

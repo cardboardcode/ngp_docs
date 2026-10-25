@@ -1,4 +1,4 @@
-# Docs Template
+# NGP
 
 A starting point for Sphinx-based documentation: pydata-sphinx-theme + MyST
 Markdown + custom CSS, derived from the Gazebo Sim docs.
