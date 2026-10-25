@@ -73,7 +73,6 @@ html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["css/gazebo.css"]
 html_favicon = "_static/icon/favicon.ico"
-
 html_theme_options = {
     "header_links_before_dropdown": 4,
     "use_edit_page_button": True,
