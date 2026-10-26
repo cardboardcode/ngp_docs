@@ -7,7 +7,7 @@ Every page below is a placeholder; content will be filled in over time.
 :hidden:
 for_developers/architecture
 for_developers/library_howtos
-for_developers/howto-guides
+for_developers/howto_guides
 for_developers/roadmap
 :::
 
