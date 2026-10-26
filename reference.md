@@ -13,16 +13,3 @@ reference/governance
 reference/projects
 reference/support
 :::
-
-:::{toctree}
-:maxdepth: 1
-:hidden:
-:caption: Fuel
-reference/fuel/fuel
-reference/fuel/content_deletion_policy
-reference/fuel/contributing_model
-reference/fuel/contributing_world
-reference/fuel/copyright
-reference/fuel/data_privacy_policy
-reference/fuel/fair_use
-:::

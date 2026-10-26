@@ -4,6 +4,6 @@ Every page is a placeholder; content will be filled in over time.
 
 :::{toctree}
 :maxdepth: 1
-for_users/simulation_tutorials
+for_users/tutorials
 for_users/how_to_guides
 :::
