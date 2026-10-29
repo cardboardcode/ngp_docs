@@ -2,29 +2,33 @@
 # Each release is identified by a short commit hash from
 # https://github.com/open-rmf/next_gen_prototype
 #
-# - "base:" is the shared content directory all releases start from.
+# - "base:" is the canonical shared content directory (a commit hash).
+#   All releases build from this tree + their own overlay, so switching
+#   the canonical base in the future only requires updating this pointer
+#   (plus keeping "preferred: true" on the release that maps to it or
+#   the newest one you want advertised as "latest").
 # - "releases:" is the set of versioned snapshots.
 # - Exactly one release must have "preferred: true" (it becomes "latest").
 #
 # See the README for the full reference.
 
-base: 251cfbf
+base: 9403fb1
 
 releases:
+  - name: 9403fb1
+    base: true
+    lts: false
+    dev: false
+    eol: false
+    preferred: true
+    description: Canonical base snapshot (commit 9403fb1 on open-rmf/next_gen_prototype main)
+    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/9403fb1
+
   - name: 251cfbf
     base: false
     lts: false
     dev: false
     eol: false
     preferred: false
-    description: Base content snapshot (commit 251cfbf on open-rmf/next_gen_prototype main)
+    description: Earlier content snapshot (commit 251cfbf on open-rmf/next_gen_prototype main)
     commit_url: https://github.com/open-rmf/next_gen_prototype/commit/251cfbf
-
-  - name: 9403fb1
-    base: false
-    lts: false
-    dev: false
-    eol: false
-    preferred: true
-    description: Snapshot for commit 9403fb1 (open-rmf/next_gen_prototype main)
-    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/9403fb1
