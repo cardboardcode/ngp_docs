@@ -1,0 +1,30 @@
+# Master manifest for the multi-release docs build.
+# Each release is identified by a short commit hash from
+# https://github.com/open-rmf/next_gen_prototype
+#
+# - "base:" is the shared content directory all releases start from.
+# - "releases:" is the set of versioned snapshots.
+# - Exactly one release must have "preferred: true" (it becomes "latest").
+#
+# See the README for the full reference.
+
+base: 251cfbf
+
+releases:
+  - name: 251cfbf
+    base: false
+    lts: false
+    dev: false
+    eol: false
+    preferred: false
+    description: Base content snapshot (commit 251cfbf on open-rmf/next_gen_prototype main)
+    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/251cfbf
+
+  - name: 9403fb1
+    base: false
+    lts: false
+    dev: false
+    eol: false
+    preferred: true
+    description: Snapshot for commit 9403fb1 (open-rmf/next_gen_prototype main)
+    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/9403fb1

@@ -1,111 +1,118 @@
 # -*- coding: utf-8 -*-
 #
-# Sphinx configuration for the generic documentation template.
+# Per-release Sphinx configuration, driven by the build-time variables
+# `-D ngp_release` and `-D ngp_root_index_file`.
 #
-# Derived from gazebosim/docs (https://github.com/gazebosim/docs): it keeps the
-# visual look (pydata-sphinx-theme + custom CSS + custom navbar/sidebar/footer
-# templates) but strips all the Gazebo-specific and multi-release build
-# machinery, leaving a single, self-contained config.
-#
-# For the full list of built-in configuration values, see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+# Shared theme / MyST settings live in base_conf.py. This file only adds the
+# values that vary per release: version/release, html_context (commit links,
+# switcher, edit-on-GitHub), and the source-manifest hook.
 
-# -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import json
+from pathlib import Path
 
-project = "NGP"
-author = "Bey Hao Yun"
-copyright = "2026, Bey Hao Yun"
+from sphinx.application import Sphinx
+from sphinx.config import Config
 
-version = "0.1"   # The short X.Y version, e.g. "1.0"
-release = "0.1"   # The full version, e.g. "1.0.3"
+import build_utils
+from base_conf import *  # noqa
 
-# -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
-extensions = [
-    "myst_parser",
-    "sphinx_copybutton",
-    "sphinx_design",
-    # "sphinxcontrib.mermaid",  # optional: re-enable + uncomment myst_fence_as_directive below
-]
-
-templates_path = ["_templates"]
-
-source_suffix = {
-    ".md": "markdown",
-}
-
-# Don't ingest package READMEs / dist-info files that live under a local venv
-# as "documents" — they would each emit a "not in any toctree" warning.
-exclude_patterns = [
-    "_build", "Thumbs.db", ".DS_Store", ".venv", ".tmp", ".build",
-    "README.md", ".codespell",
-]
-
-myst_heading_anchors = 4
-
-myst_enable_extensions = [
-    "attrs_inline",
-    "attrs_block",
-    "colon_fence",
-    "deflist",
-    "fieldlist",
-    "html_admonition",
-    "html_image",
-    "linkify",
-    "replacements",
-    "smartquotes",
-    "strikethrough",
-    "substitution",
-    "tasklist",
-]
-
-# myst_fence_as_directive = ["mermaid"]  # enable together with sphinxcontrib.mermaid
-
-# Be forgiving about unresolved references; tighten to True once links are clean.
-nitpicky = False
-
-# -- Options for HTML output -------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-
-html_theme = "pydata_sphinx_theme"
-html_static_path = ["_static"]
-html_css_files = ["css/gazebo.css"]
-html_favicon = "_static/icon/favicon.ico"
-html_theme_options = {
-    "header_links_before_dropdown": 4,
-    "use_edit_page_button": True,
-    "show_toc_level": 1,
-    "navigation_with_keys": False,
-    "show_prev_next": False,
-    "footer_center": ["footer"],
-    "secondary_sidebar_items": ["page-toc"],
-    "navbar_align": "left",
-    "navbar_center": ["navbar-nav"],
-    "navbar_end": ["navbar-icon-links", "theme-switcher"],
-    "pygments_light_style": "tango",
-    "pygments_dark_style": "monokai",
-    # TODO: replace with your project logo (SVGs live in _static/images/logos/)
-    "logo": {
-        "image_light": "_static/images/logos/logo_light.svg",
-        "image_dark": "_static/images/logos/logo_dark.svg",
-    },
-    "check_switcher": False,
-    "show_version_warning_banner": False,
-}
-
-# The sidebar is driven by _templates/sidebar-nav.html, which renders a
-# toctree explicitly named "sidebar" (see index.md).
-html_sidebars = {"**": ["sidebar-nav"]}
-html_sidebar = "sidebar-nav"
-
-# "Edit this page" button: point these at your own repo (or set
-# "use_edit_page_button": False to hide the button entirely).
-html_context = {
-    "github_user": "your-org",            # TODO: your GitHub org/user
-    "github_repo": "your-docs",           # TODO: your documentation repo name
-    "github_version": "main",             # TODO: the branch holding the docs
-    "edit_page_url_template": "{{ github_url }}/{{ github_user }}/{{ github_repo }}/edit/{{ github_version }}/{{ doc_path }}",
+html_context.update({
+    "github_user": "open-rmf",
+    "github_repo": "ngp_docs",
+    "github_version": "main",
+    "edit_page_url_template": "{{ github_url }}/{{ github_user }}/{{ github_repo }}"
+    "/edit/{{ github_version }}/{{ get_file_from_map(file_name) }}",
     "edit_page_provider_name": "GitHub",
-}
+})
+
+
+def setup_file_map(app: Sphinx, pagename: str, templatename: str, context, doctree):
+    def get_file_from_map(file_name: str):
+        source_manifest = context["source_manifest"]
+        result = context["file_name_map"].get(Path(file_name).stem)
+
+        if result:
+            return source_manifest.get(result, file_name)
+        # Fallback for non-markdown files or files not in the manifest
+        return source_manifest.get(file_name, file_name)
+
+    context["get_file_from_map"] = get_file_from_map
+
+
+def load_releases(index_file):
+    import yaml
+    with open(index_file) as top_index_file:
+        nav_yaml = yaml.safe_load(top_index_file)
+    return dict([(release["name"], release) for release in nav_yaml["releases"]])
+
+
+def create_file_rename_map(nav_yaml_pages):
+    file_name_map = {}
+    base_prefix = None
+    for page in nav_yaml_pages:
+        if "file" in page:
+            file_ref = page["file"]
+            # Strip the base-commit prefix (e.g. "251cfbf:") if present.
+            if ":" in file_ref:
+                base_prefix, file_ref = file_ref.split(":", 1)
+            file_name_map[page["name"]] = file_ref
+
+        children = page.get("children")
+        if children:
+            file_name_map.update(create_file_rename_map(children))
+    return file_name_map
+
+
+def config_init(app: Sphinx, config: Config):
+    if not config.ngp_release:
+        raise RuntimeError("ngp_release not provided")
+    config.release = config.ngp_release  # type: ignore
+    config.version = config.ngp_release  # type: ignore
+
+    # Load the file map generated by the build script (powers "Edit on GitHub").
+    manifest_path = Path(app.srcdir) / 'source_manifest.json'
+    with open(manifest_path) as f:
+        source_manifest = json.load(f)
+    build_utils.register_yaml_include(Path(config.ngp_root_index_file).parent)
+    flatten_navigation = build_utils.flatten_navigation
+
+    import yaml
+    with open(Path(app.srcdir) / "index.yaml") as f:
+        file_name_map = create_file_rename_map(
+            flatten_navigation(yaml.safe_load(f)["pages"])
+        )
+
+    config.html_context["file_name_map"] = file_name_map
+    config.html_context["source_manifest"] = source_manifest
+
+    # Set commit_url from the releases registry, if available.
+    try:
+        releases = load_releases(config.ngp_root_index_file)
+        release_info = releases[config.ngp_release]
+        if release_info.get("commit_url"):
+            config.html_context["commit_url"] = release_info["commit_url"]
+    except KeyError as e:
+        print(e)
+
+    config.html_context["ngp_release"] = config.ngp_release
+
+    # check_switcher is disabled (see base_conf); wire up the switcher here.
+    assert Path(f"{app.srcdir}/_static/switcher.json").exists()
+    # Path sub-directory where release trees are published. Defaults to ""
+    # (web root). Set NGP_DOCS_PATH="/docs" when serving under a sub-directory.
+    docs_path = os.environ.get("NGP_DOCS_PATH", "")
+    config.html_theme_options["switcher"] = {
+        "json_url": f"{config.html_context.get('deploy_url', 'http://localhost:8000')}{docs_path}/{config.ngp_release}/_static/switcher.json",
+        "version_match": config.ngp_release,
+    }
+
+
+def setup(app: Sphinx):
+    app.add_config_value("ngp_release", "", rebuild="env", types=[str])
+    app.add_config_value("ngp_root_index_file", "", rebuild="env", types=[str])
+    # deploy_url is set from base_conf via html_context (see NGP_DEPLOY_URL env var).
+    if "deploy_url" not in html_context:
+        import os
+        html_context["deploy_url"] = os.environ.get("NGP_DEPLOY_URL", "")
+    app.connect("html-page-context", setup_file_map)
+    app.connect("config-inited", config_init)
