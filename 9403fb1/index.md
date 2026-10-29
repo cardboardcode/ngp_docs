@@ -35,11 +35,8 @@ get_started/api
 :titlesonly:
 :caption: For Users
 
-for_users
 for_users/tutorials
 for_users/how_to_guides
-for_users/how_to_guides/web_visualization
-for_users/tutorials/moving_robot
 ```
 
 ```{toctree}
@@ -47,17 +44,11 @@ for_users/tutorials/moving_robot
 :titlesonly:
 :caption: For Developers
 
-for_developers
 for_developers/architecture
 for_developers/library_howtos
 for_developers/roadmap
 for_developers/development
 for_developers/howto_guides
-for_developers/development/contributing
-for_developers/development/maintainers
-for_developers/development/ci
-for_developers/howto_guides/ci
-for_developers/development/release
 ```
 
 ```{toctree}
@@ -65,7 +56,6 @@ for_developers/development/release
 :titlesonly:
 :caption: Reference
 
-reference
 reference/release_features
 reference/releases
 reference/governance
