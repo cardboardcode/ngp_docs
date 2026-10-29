@@ -1,43 +1,95 @@
-# 🚀 Getting Started
+# Getting Started 🚀
 
-This page demonstrates the building blocks the template ships with:
-prose, code blocks with copy buttons, and callout boxes.
+This guide walks you through setting up a development environment, building the
+`next_gen_prototype` workspace, running its automated integration tests, and
+launching the interactive web demonstration.
+
+:::{warning}
+`next_gen_prototype` is a project under construction — these instructions are
+likely to **change rapidly**.
+:::
 
 ## Prerequisites
 
-- Python 3.10+
-- `make` (optional, we build directly with `sphinx-build` here)
+| Dependency        | Notes                                                            |
+|:----------------- |:-----------------------------------------------------------------|
+| **ROS 2 Jazzy Jalisco**   | [Ubuntu install (debs)](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html), including the [development tools](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html#install-development-tools-optional) |
+| **Rust**          | The latest stable toolchain (managed by `rustup`)                |
+| **colcon + Cargo** | `python3-colcon-cargo`, `colcon-ros-cargo`, `cargo-ament-build`  |
 
-## Install
+## Instructions 📘
 
-:::{code-block} bash
-:caption: Install the build dependencies
+We provide a pre-built base image (`ros2_rust_base`) that bundles **all**
+dependencies. Bring it up with `rocker`, `distrobox`, `podman`, or any other
+OCI-compliant tool — the example below uses [`distrobox`](https://github.com/containers/distrobox):
+
+```{code-block} bash
+:caption: Create and enter the distrobox container
+
+    distrobox create --image ghcr.io/open-rmf/ros2_rust_base:jazzy -n ros2_rust_base
+    distrobox enter ros2_rust_base
+```
+
+:::{note}
+From this point on, **all commands must be run inside the container** (or on
+your local system, if you chose Method 1).
+:::
+
+## 2. Import workspace dependencies
+
+Create a fresh ROS 2 workspace and clone the repository into it:
+
+```{code-block} bash
+:caption: Create the workspace and clone next_gen_prototype
+
+    mkdir -p rmf_ws/src
+    cd rmf_ws/src
+    git clone https://github.com/open-rmf/next_gen_prototype.git
+    cd ..
+```
+
+The workspace layout now looks like this:
+
+```
+rmf_ws/
+├── build/        ← (created by colcon)
+├── install/      ← (created by colcon)
+└── src/
+    └── next_gen_prototype/
+```
+
+## 3. Install ROS package dependencies
+
+```{code-block} bash
+:caption: Resolve and install all rosdep keys
 :emphasize-lines: 1
+:linenos:
 
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -r requirements.txt
+    rosdep update
+    rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr
+```
+
+## 4. Build the workspace
+
+Make sure you are at the **workspace root** (i.e. inside `rmf_ws/`), then build:
+
+```{code-block} bash
+:caption: Build all packages in the workspace
+
+    source /opt/ros/jazzy/setup.bash
+    colcon build
+```
+
+:::{danger}
+If `colcon build` fails with a missing Cargo toolchain error, double-check that
+`rustc` and `cargo` are on your `PATH` (`rustup show`), and that the
+colcon ↔ Cargo bridge packages from Step 1 were installed successfully.
 :::
 
-:::{tip}
-The copy button on the right-hand side of every code block comes from
-`myst_parser` + `sphinx_copybutton` — no extra work is needed to wire it up.
+:::{seealso}
+Stuck somewhere? Please open an
+[issue on the repository](https://github.com/open-rmf/next_gen_prototype/issues)
+or post to the
+[Open-RMF ideas board](https://discourse.ros.org/c/open-rmf/open-rmf-ideas/105)
+on Discourse.
 :::
-
-## Build and preview
-
-:::{code-block} bash
-:caption: Build the site
-
-sphinx-build -b html . _build/html
-python -m http.server -d _build/html
-:::
-
-Then open <http://localhost:8000> in a browser.
-
-## What's in the repo
-
-- `conf.py` — single, self-contained Sphinx configuration.
-- `_templates/` — custom navbar, sidebar and footer overrides.
-- `_static/css/gazebo.css` — the theme's CSS overrides.
-- Sample pages: `index.md`, `get_started/getting_started.md`, `get_started/tutorials.md`, `get_started/api.md`.
