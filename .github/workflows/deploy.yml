@@ -36,6 +36,15 @@ jobs:
       - name: Build docs with Sphinx
         # Multi-release build: assembles per-release trees in .tmp/ and builds
         # them to .build/docs/<release>/, plus "latest"/"all" pointers.
+        # NGP_DEPLOY_URL must be the public origin of the Pages site so the
+        # version-switcher switcher.json URLs embedded in every page (and the
+        # url entries inside switcher.json) point at this site instead of
+        # localhost. See base_conf.py.
+        env:
+          NGP_DEPLOY_URL: "https://cardboardcode.github.io"
+          # The Pages site lives under /ngp_docs (project page); prepend it to
+          # every switcher URL so entries resolve on the live site.
+          NGP_DOCS_PATH: "/ngp_docs"
         run: python build_multiversion.py --pointers --output_dir .build
 
       - name: Setup Pages
