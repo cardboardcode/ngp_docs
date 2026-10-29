@@ -34,7 +34,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build docs with Sphinx
-        run: sphinx-build -b html . .build/html
+        # Multi-release build: assembles per-release trees in .tmp/ and builds
+        # them to .build/docs/<release>/, plus "latest"/"all" pointers.
+        run: python build_multiversion.py --pointers --output_dir .build
 
       - name: Setup Pages
         id: pages
@@ -43,7 +45,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .build/html
+          path: .build/docs
 
       - name: Deploy to GitHub Pages
         id: deployment
