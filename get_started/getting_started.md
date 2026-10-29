@@ -1,4 +1,4 @@
-# Getting started
+# 🚀 Getting Started
 
 This page demonstrates the building blocks the template ships with:
 prose, code blocks with copy buttons, and callout boxes.
