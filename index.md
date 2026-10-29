@@ -6,9 +6,7 @@ Markdown + custom CSS, derived from the Gazebo Sim docs.
 :::{toctree}
 :maxdepth: 2
 :caption: Get Started
-getting_started
-tutorials
-api
+get_started
 :::
 
 :::{toctree}

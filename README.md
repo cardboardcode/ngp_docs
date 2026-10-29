@@ -12,9 +12,9 @@ machinery, replacing them with a handful of sample pages.
 |------|---------|
 | `conf.py` | Single, self-contained Sphinx configuration |
 | `index.md` | Landing page, design grid, and the `main` + `sidebar` toctrees |
-| `getting_started.md` | Code blocks with copy buttons, callouts |
-| `tutorials.md` | Task lists (`- [ ]`) and admonitions (`{note}`, `{tip}`, `{danger}`) |
-| `api.md` | API reference placeholder |
+| `get_started/getting_started.md` | Code blocks with copy buttons, callouts |
+| `get_started/tutorials.md` | Task lists (`- [ ]`) and admonitions (`{note}`, `{tip}`, `{danger}`) |
+| `get_started/api.md` | API reference placeholder |
 | `_templates/sidebar-nav.html` | Sidebar driven by a toctree named `sidebar` |
 | `_templates/navbar-nav.html` | Placeholder top-nav links (edit me) |
 | `_templates/footer.html` | Generic footer |

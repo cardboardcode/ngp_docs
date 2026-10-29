@@ -4,10 +4,8 @@ Every page below is a placeholder; content will be filled in over time.
 
 :::{toctree}
 :maxdepth: 1
-:hidden:
 reference/release_features
 reference/releases
 reference/governance
-reference/projects
 reference/support
 :::

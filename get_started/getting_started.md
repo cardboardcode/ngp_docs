@@ -40,4 +40,4 @@ Then open <http://localhost:8000> in a browser.
 - `conf.py` — single, self-contained Sphinx configuration.
 - `_templates/` — custom navbar, sidebar and footer overrides.
 - `_static/css/gazebo.css` — the theme's CSS overrides.
-- Sample pages: `index.md`, `getting_started.md`, `tutorials.md`, `api.md`.
+- Sample pages: `index.md`, `get_started/getting_started.md`, `get_started/tutorials.md`, `get_started/api.md`.

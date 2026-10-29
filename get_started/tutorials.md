@@ -29,5 +29,6 @@ Dangers highlight pitfalls that can cause data loss or broken builds.
 ## Next steps
 
 Continue to the {doc}`api` placeholder, or delete the sample pages and drop
+
 your own Markdown files into the source root; then list them in the
 toctree in `index.md` (the sidebar renders it directly).
