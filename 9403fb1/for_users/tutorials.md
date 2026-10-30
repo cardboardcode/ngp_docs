@@ -7,6 +7,7 @@ Every page below is a placeholder; content will be filled in over time.
 ```{toctree}
 :maxdepth: 1
 tutorials/interactive_web_demo
+tutorials/nav2_integration
 ```
 
 :::{seealso}
