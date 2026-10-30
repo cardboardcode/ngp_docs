@@ -39,6 +39,12 @@ pages:
       - name: architecture
         title: Architecture
         file: 9403fb1:for_developers/architecture.md
+      - name: plan_interface
+        title: Plan Interface (~/plan)
+        file: 9403fb1:for_developers/architecture/plan_interface.md
+      - name: waypoint_lifecycle
+        title: Waypoint Lifecycle and Traffic Dependencies
+        file: 9403fb1:for_developers/architecture/waypoint_lifecycle.md
       - name: library_howtos
         title: Library How-to Guides
         file: 9403fb1:for_developers/library_howtos.md

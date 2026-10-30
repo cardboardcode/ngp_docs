@@ -21,13 +21,13 @@ pip install -r requirements.txt
 ```bash
 # build the site
 . .venv/bin/activate
-sphinx-build -b html . _build/html
+python build_multiversion.py --pointers --output_dir .build
 ```
 
 ```bash
 # preview
 . .venv/bin/activate
-python -m http.server -d _build/html
+python -m http.server -d .build/docs
 ```
 
 **Access** the local documentation portal below:

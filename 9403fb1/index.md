@@ -12,6 +12,7 @@ This is an unofficial documentation hub that tracks next_gen_prototype.
 A preliminary reference implementation of Open-RMF Next Generation which is built around **4 core design goals**:
 
 ```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 10, "rankSpacing": 15, "padding": 6}, "themeCSS": ".cluster-label div { max-width: 300px !important; } .cluster-label span, .node .nodeLabel { font-size: 12.5px !important; }"}}%%
 flowchart LR
     subgraph Core["💼 Commercial-Friendly Open-Source Core"]
         direction TB
