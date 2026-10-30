@@ -8,7 +8,7 @@ An **unofficial** documentation portal that tracks **per-commit next_gen_prototy
 
 > https://cardboardcode.github.io/ngp_docs/latest/
 
-## Build
+## **Build**
 
 If you wish to view it **locally**, run the commands below:
 
