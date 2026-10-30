@@ -80,7 +80,7 @@ html_theme_options = {
         "image_light": "_static/images/logos/logo_light.svg",
         "image_dark": "_static/images/logos/logo_dark.svg",
     },
-    "check_switcher": True,
+    "check_switcher": False,
     "show_version_warning_banner": False,
 }
 
@@ -90,6 +90,6 @@ html_sidebar = "sidebar-nav"
 import os
 
 html_context = {
-    # Default to the local web-root server so a plain build (no env vars) works.
-    "deploy_url": os.environ.get("NGP_DEPLOY_URL", "http://localhost:8000"),
+    # Default to empty (origin-relative) so local servers on any host/port work.
+    "deploy_url": os.environ.get("NGP_DEPLOY_URL", ""),
 }

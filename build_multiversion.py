@@ -126,9 +126,9 @@ def generate_sources(nav_yaml, root_src_dir, tmp_dir, ngp_release):
     with open(manifest_path, 'w') as f:
         json.dump(manifest, f, indent=2)
 
-    deploy_url = os.environ.get("NGP_DEPLOY_URL", "http://localhost:8000")
+    deploy_url = os.environ.get("NGP_DEPLOY_URL", "")
     # Path sub-directory where this release tree is published. Defaults to ""
-    # (web root, matching the local `python3 -m http.server .build/docs` server).
+    # (web root, matching the local `python3 -m http.server -d .build/docs` server).
     # Set to "/docs" (etc.) when serving under a sub-directory.
     docs_path = os.environ.get("NGP_DOCS_PATH", "")
     is_hex = lambda s: all(c in "0123456789abcdef" for c in s.lower())

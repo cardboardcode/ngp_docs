@@ -102,7 +102,7 @@ def config_init(app: Sphinx, config: Config):
     # (web root). Set NGP_DOCS_PATH="/docs" when serving under a sub-directory.
     docs_path = os.environ.get("NGP_DOCS_PATH", "")
     config.html_theme_options["switcher"] = {
-        "json_url": f"{config.html_context.get('deploy_url', 'http://localhost:8000')}{docs_path}/{config.ngp_release}/_static/switcher.json",
+        "json_url": f"{config.html_context.get('deploy_url', '')}{docs_path}/{config.ngp_release}/_static/switcher.json",
         "version_match": config.ngp_release,
     }
 
