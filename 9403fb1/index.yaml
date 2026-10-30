@@ -28,6 +28,9 @@ pages:
         title: Web Visualization
         file: 9403fb1:for_users/how_to_guides/web_visualization.md
         children: []
+      - name: interactive_web_demo
+        title: Running the Interactive Web Demonstration
+        file: 9403fb1:for_users/tutorials/interactive_web_demo.md
       - name: moving_robot
         title: Moving Robot
         file: 9403fb1:for_users/tutorials/moving_robot.md

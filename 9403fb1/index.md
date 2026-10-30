@@ -49,8 +49,6 @@ move between different release snapshots.
 :caption: Get Started
 
 get_started/getting_started
-get_started/tutorials
-get_started/api
 ```
 
 ```{toctree}
