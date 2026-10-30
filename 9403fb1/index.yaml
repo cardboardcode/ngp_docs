@@ -34,6 +34,9 @@ pages:
       - name: nav2_integration
         title: Nav2 Integration for Next-Gen RMF
         file: 9403fb1:for_users/tutorials/nav2_integration.md
+      - name: layered_map_server_demos
+        title: Layered Map Server Demos
+        file: 9403fb1:for_users/tutorials/layered_map_server_demos.md
       - name: moving_robot
         title: Moving Robot
         file: 9403fb1:for_users/tutorials/moving_robot.md

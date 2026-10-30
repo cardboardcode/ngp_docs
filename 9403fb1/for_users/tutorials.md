@@ -8,6 +8,7 @@ Every page below is a placeholder; content will be filled in over time.
 :maxdepth: 1
 tutorials/interactive_web_demo
 tutorials/nav2_integration
+tutorials/layered_map_server_demos
 ```
 
 :::{seealso}
