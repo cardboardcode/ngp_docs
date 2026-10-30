@@ -23,7 +23,7 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_design",
-    # "sphinxcontrib.mermaid",  # optional: re-enable + uncomment myst_fence_as_directive below
+    "sphinxcontrib.mermaid",
 ]
 
 templates_path = ["_templates"]
@@ -50,7 +50,7 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
-# myst_fence_as_directive = ["mermaid"]  # enable together with sphinxcontrib.mermaid
+myst_fence_as_directive = ["mermaid"]
 
 # Be forgiving about unresolved references; tighten to True once links are clean.
 nitpicky = False

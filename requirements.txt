@@ -3,6 +3,6 @@ pydata-sphinx-theme
 sphinx
 sphinx-copybutton
 sphinx-design
-# sphinxcontrib-mermaid   # optional: diagrams via ```mermaid fences (enable in conf.py)
+sphinxcontrib-mermaid
 PyYAML
 requests
